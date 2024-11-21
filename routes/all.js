@@ -19,6 +19,8 @@ const createDocument = async (req, res)=>{
 const getArticles = async (req, res)=>{
     try {
         const foundArticles = await Article.find();
+
+        // this if else statement checkes client side errors
         if (foundArticles.length > 0){
             res.status(200).send(foundArticles);
         } else {
@@ -30,9 +32,10 @@ const getArticles = async (req, res)=>{
         }
         
     } catch (error) {
+        //this catch statement checkes server side errors
         console.error("Error fetching articles:", error);
         res.status(500).send({
-            message: "An error"+code+" occurred while fetching articles.",
+            message: "An error occurred while fetching articles.",
             error: error.message,
         });
     }
